@@ -21,7 +21,7 @@ Third-party dependencies grouped by their license type (see [pom.xml](/pom.xml) 
         <#assign dependencies = e.getValue()/>
         <#if dependencies?size &gt; 0>
 
-${licenseName}:
+${licenseName}
 -------------------------------
 
             <#list dependencies as dependency>
