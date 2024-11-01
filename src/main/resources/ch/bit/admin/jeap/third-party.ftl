@@ -8,8 +8,8 @@
     </#if>
 </#function>
 
-Third-Party Dependencies
-========================
+Third-Party Dependency Licenses
+===============================
 
 <#if licenseMap?size == 0>
 This project is not using any third-party dependencies.
@@ -22,7 +22,7 @@ Third-party dependencies grouped by their license type (see [pom.xml](/pom.xml) 
         <#if dependencies?size &gt; 0>
 
 ${licenseName}:
-------------------------
+-------------------------------
 
             <#list dependencies as dependency>
  * ${dependencyLine(dependency)}

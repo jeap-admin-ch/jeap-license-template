@@ -41,7 +41,7 @@
                             <goal>add-third-party</goal>
                         </goals>
                         <configuration>
-                            <fileTemplate>${project.basedir}/src/main/resources/third-party.ftl</fileTemplate>
+                            <fileTemplate>${project.basedir}/src/main/resources/ch/bit/admin/jeap/third-party.ftl</fileTemplate>
                             <outputDirectory>${project.basedir}</outputDirectory>
                             <thirdPartyFilename>THIRD-PARTY-LICENSES.md</thirdPartyFilename>
                         </configuration>
