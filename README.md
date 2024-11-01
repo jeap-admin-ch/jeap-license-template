@@ -19,16 +19,16 @@ Add the license template to the maven license plugin configuration in the POM fi
 <plugin>
     <groupId>org.codehaus.mojo</groupId>
     <artifactId>license-maven-plugin</artifactId>
-    <version>2.4.0</version>
+    <version>${license-maven-plugin.version}</version>
     <dependencies>
         <dependency>
             <groupId>org.jeap.dev</groupId>
             <artifactId>jeap-license-template</artifactId>
-            <version>1.0.0</version>
+            <version>${jeap-license-template.version}</version>
         </dependency>
     </dependencies>
     <configuration>
-        <fileTemplate>/org/codehaus/mojo/license/third-party-file-groupByLicense.ftl</fileTemplate>
+        <fileTemplate>/ch/admin/bit/jeap/third-party.md.ftl</fileTemplate>
         <!-- ... -->
     </configuration>
 </plugin>
