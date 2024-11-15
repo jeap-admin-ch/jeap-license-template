@@ -4,7 +4,7 @@ All jEAP Open Source repositories follow the security issue reporting process ou
 [jeap-admin-ch/SECURITY.md](https://github.com/jeap-admin-ch/jeap/SECURITY.md).
 
 To report a security issue, please use the GitHub Security Advisory
-["Report a Vulnerability"](https://github.com/jeap-admin-ch/jeap-crypto/security/advisories/new) feature.
+["Report a Vulnerability"](https://github.com/jeap-admin-ch/jeap-license-template/security/advisories/new) feature.
 
 The jEAP maintainers will respond with the next steps for handling your report. After the initial reply, the maintainers
 will keep you informed about progress toward a fix and public announcement. They may also request additional information
