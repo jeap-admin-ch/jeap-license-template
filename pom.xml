@@ -7,10 +7,13 @@
     <url>https://github.com/jeap-admin-ch/jeap-license-template</url>
     <scm>
         <url>https://github.com/jeap-admin-ch/jeap-license-template</url>
+        <connection>scm:git:git://github.com/jeap-admin-ch/jeap-license-template.git</connection>
+        <developerConnection>scm:git:ssh://github.com:jeap-admin-ch/jeap-license-template.git</developerConnection>
     </scm>
     <developers>
         <developer>
             <name>BIT</name>
+            <email>jeap-community@bit.admin.ch</email>
             <organization>Federal Office of Information Technology, Systems and Telecommunication FOITT</organization>
             <organizationUrl>https://www.bit.admin.ch/</organizationUrl>
         </developer>
@@ -25,7 +28,7 @@
 
     <groupId>ch.admin.bit.jeap</groupId>
     <artifactId>jeap-license-template</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3-SNAPSHOT</version>
     <name>jeap-license-template</name>
     <description>
         Third-party license list file template for the Maven License Plugin
@@ -93,6 +96,67 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>maven-central-publish</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <!-- The jeap-central-publishing-maven-plugin will handle deployment to maven central, skip the deploy plugin -->
+                <maven.deploy.skip>true</maven.deploy.skip>
+                <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <configuration>
+                            <gpgArguments>
+                                <!-- Note: These arguments are required for gpg 2.1+ -->
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>ch.admin.bit.jeap</groupId>
+                        <artifactId>jeap-central-publishing-maven-plugin</artifactId>
+                        <extensions>true</extensions>
+                        <executions>
+                            <execution>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>publish</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <publishingServerId>maven-central</publishingServerId>
+                            <autoPublish>${maven-central-autopublish}</autoPublish>
+                            <skipPublishing>false</skipPublishing>
+                            <waitPollingInterval>15</waitPollingInterval>
+                            <ignorePublishedComponents>true</ignorePublishedComponents>
+                            <deploymentName>${project.name}</deploymentName>
+                            <waitUntil>${maven-central-wait-until}</waitUntil>
+                            <waitMaxTime>2700</waitMaxTime>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <distributionManagement>
         <repository>
