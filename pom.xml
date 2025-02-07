@@ -39,6 +39,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
+        <maven-central-autopublish>true</maven-central-autopublish>
+        <maven-central-wait-until>published</maven-central-wait-until>
     </properties>
 
     <build>
