@@ -14,11 +14,17 @@ softwareType: library
 description:
   en:
     localisedName: jeap-license-template
-    shortDescription: TODO (Max. 150 characters)
+    shortDescription: Third-party license list file template for the Maven License Plugin
     longDescription: >
-      TODO (Min. 150 characters)
+      The third-party license list file template for the Maven License Plugin provides a clear record of project 
+      dependencies and their licenses. It ensures transparency and simplifies compliance reviews.
+      The file is written in Markdown for readability in both raw and rendered formats, making it easy to maintain and
+      review in version control.
+      Version numbers are intentionally omitted to avoid unnecessary changes during merges between snapshot and 
+      non-snapshot branches. Exact versions remain available in the Maven POM file, keeping the list focused on licenses
+      while preventing merge conflicts.
     features:
-      - TODO
+      - License template file for the maven-license-plugin, to be used in all open-source jEAP repos
 legal:
   license: Apache-2.0
 maintenance:
