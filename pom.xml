@@ -28,7 +28,7 @@
 
     <groupId>ch.admin.bit.jeap</groupId>
     <artifactId>jeap-license-template</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
     <name>jeap-license-template</name>
     <description>
         Third-party license list file template for the Maven License Plugin
@@ -38,7 +38,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
         <maven-central-autopublish>true</maven-central-autopublish>
         <maven-central-wait-until>published</maven-central-wait-until>
     </properties>
@@ -67,7 +67,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>2.4.0</version>
+                <version>2.7.1</version>
                 <executions>
                     <execution>
                         <id>add-third-party</id>
