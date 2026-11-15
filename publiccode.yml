@@ -2,7 +2,7 @@ publiccodeYmlVersion: 0.4.0
 name: jeap-license-template
 applicationSuite: jEAP
 softwareVersion: 1.3.0
-releaseDate: 2026-11-15
+releaseDate: 2026-11-16
 url: "https://github.com/jeap-admin-ch/jeap-license-template.git"
 landingURL: "https://github.com/jeap-admin-ch/jeap"
 platforms:
