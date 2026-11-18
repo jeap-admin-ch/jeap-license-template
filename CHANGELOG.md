@@ -8,7 +8,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.3.1] - 2026-11-18
 
 ### Fixed
-- Generate the CycloneDX SBOM in the `maven-central-publish` profile despite `maven.deploy.skip`, so the pipeline's Trivy scan works again
+- Deploy releases to the jEAP Nexus repository again, after the validation on Maven Central, as the jEAP parent does, which also restores the SBOM for the pipeline's Trivy scan
+
+### Changed
+- Do not wait for the publication on Maven Central, only for its validation, as the jEAP parent does
+- Mirror the published artifacts to the further jEAP repositories
 
 ## [1.3.0] - 2026-11-15
 

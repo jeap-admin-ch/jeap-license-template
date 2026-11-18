@@ -39,8 +39,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <jacoco-maven-plugin.version>0.8.16</jacoco-maven-plugin.version>
+        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+        <jeap-central-publishing-maven-plugin.version>0.18.0</jeap-central-publishing-maven-plugin.version>
+        <maven-deploy-plugin.version>3.2.0</maven-deploy-plugin.version>
         <maven-central-autopublish>true</maven-central-autopublish>
-        <maven-central-wait-until>published</maven-central-wait-until>
+        <maven-central-wait-until>validated</maven-central-wait-until>
     </properties>
 
     <build>
@@ -105,24 +108,19 @@
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
-            <properties>
-                <!-- The jeap-central-publishing-maven-plugin will handle deployment to maven central, skip the deploy plugin -->
-                <maven.deploy.skip>true</maven.deploy.skip>
-                <!-- The artifact is still published (to Maven Central), so the pipeline's Trivy scan needs the SBOM -->
-                <cyclonedx.skipNotDeployed>false</cyclonedx.skipNotDeployed>
-                <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
-            </properties>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${maven-gpg-plugin.version}</version>
                         <configuration>
                             <gpgArguments>
                                 <!-- Note: These arguments are required for gpg 2.1+ -->
                                 <arg>--pinentry-mode</arg>
                                 <arg>loopback</arg>
                             </gpgArguments>
+                            <bestPractices>true</bestPractices>
                         </configuration>
                         <executions>
                             <execution>
@@ -137,9 +135,11 @@
                     <plugin>
                         <groupId>ch.admin.bit.jeap</groupId>
                         <artifactId>jeap-central-publishing-maven-plugin</artifactId>
+                        <version>${jeap-central-publishing-maven-plugin.version}</version>
                         <extensions>true</extensions>
                         <executions>
                             <execution>
+                                <id>central-publish</id>
                                 <phase>deploy</phase>
                                 <goals>
                                     <goal>publish</goal>
@@ -152,10 +152,34 @@
                             <skipPublishing>false</skipPublishing>
                             <waitPollingInterval>15</waitPollingInterval>
                             <ignorePublishedComponents>true</ignorePublishedComponents>
-                            <deploymentName>${project.name}</deploymentName>
+                            <deploymentName>${project.artifactId}-${project.version}</deploymentName>
                             <waitUntil>${maven-central-wait-until}</waitUntil>
                             <waitMaxTime>2700</waitMaxTime>
                         </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <version>${maven-deploy-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>after-publish-validation-deploy</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals>
+                                <configuration>
+                                    <deployAtEnd>true</deployAtEnd>
+                                </configuration>
+                            </execution>
+                            <!-- The built-in execution must be disabled as it would run before the
+                            central-publishing-maven-plugin. We want to validate central deployments before deploying
+                             to the jEAP repository. -->
+                            <execution>
+                                <id>default-deploy</id>
+                                <phase>none</phase>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
