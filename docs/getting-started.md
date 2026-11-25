@@ -15,7 +15,7 @@ customize it.
 |---|---|
 | Group / artifact | `ch.admin.bit.jeap:jeap-license-template` |
 | Template path in the jar | `/ch/admin/bit/jeap/third-party.md.ftl` |
-| Availability | Maven Central (since 1.0.3) |
+| Availability | Releases up to 1.5.0 on Maven Central; newer releases are not published there |
 
 ## In a jEAP project (nothing to configure)
 
